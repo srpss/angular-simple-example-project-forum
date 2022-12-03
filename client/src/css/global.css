@@ -1,0 +1,119 @@
+.main {
+    position: relative;
+    background-color: #bbb;
+    width: 100%;
+    left: 0;
+   
+
+}
+
+.nav {
+
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background-color: lightskyblue;
+    position: relative;
+    border-top: 0px;
+    border: 0px;
+    padding: 0px;
+    top: 0;
+    width: 100%;
+    left: 0;
+
+}
+
+
+.li {
+    float: left;
+    border-right: 1px solid #bbb;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: darkgrey;
+
+    transition-delay: 100ms;
+    transition-duration: 100ms;
+}
+
+.active {
+    background-color: darkgrey;
+    transition-delay: 100ms;
+    transition-duration: 100ms;
+}
+
+body {
+    background-color: #bbb;
+    font-style: normal;
+    
+}
+
+ul {
+    list-style-type: none;
+    margin-left:0px;
+    padding-left:0px;
+}
+
+.navusername{
+    position:relative;
+    top:15px;
+    font-family: 'Courier New', Courier, monospace;
+    color:black;
+    
+
+   }
+
+   .navimage{
+    position:relative;
+    left:10px;
+    top: 2px
+   }
+
+   button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .btn.submit {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.delete{
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
