@@ -2,7 +2,7 @@
  simple exam project
  includes everything it needs. It was uploaded in Git with node_module
  cd client > npm start
- cd server > npm start
+ cd server > npm i > npm start
 
 ## Architecture 
 - Client -React
