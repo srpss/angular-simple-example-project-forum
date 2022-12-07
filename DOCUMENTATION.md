@@ -1,7 +1,7 @@
 # react-project-exam
  simple exam project
  includes everything it needs. It was uploaded in Git with node_module
- cd client > npm start
+ cd client > ng serve
  cd server > npm i > npm start
 
 ## Architecture 
