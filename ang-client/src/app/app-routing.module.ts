@@ -11,7 +11,7 @@ const routes: Routes = [{path: 'register', component: RegisterComponent},
 {path: 'login', component: LoginComponent},
 {path: 'profile', component: ProfileComponent},
 {path: '', component: MainComponent},
-{path: 'SearchComponent', component: SearchComponent},];
+{path: 'search', component: SearchComponent},];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
