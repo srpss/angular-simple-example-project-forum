@@ -19,17 +19,25 @@
 }
 
 .goTo{
-    border: 2px solid;
-    border-color: white;
-    color: white;
-    
-    
+   
+    color:white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
     text-decoration: none; 
-    background-color: grey;
+    background-color: blueviolet;
+    width: 30%;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 0 auto;
 }
 
 .right{
     display: flex;
     flex-direction: column;
     text-align: center;
+}
+
+.update{
+    margin-top: 25px;
 }

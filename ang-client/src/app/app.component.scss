@@ -3,6 +3,7 @@ ul{
     display: flex;
     justify-content: space-between;
     gap:25px;
+   
 }
 nav{
     background-color: gray;
@@ -15,4 +16,9 @@ nav{
 }
 nav li{
     padding-right: 15px;
+    
+}
+a{
+    text-decoration: none; 
+    color: white;
 }
