@@ -32,6 +32,11 @@
     margin: 0 auto;
 }
 
+.goTo:hover{
+    background-color: rgba(137, 43, 226, 0.725);
+    
+}
+
 .right{
     display: flex;
     flex-direction: column;
@@ -40,4 +45,17 @@
 
 .update{
     margin-top: 25px;
+    color:white;
+   
+    background-color: blueviolet;
+    width: 10%;
+    border-radius: 20px;
+    padding: 1%;
+    
+    border: none;
+  
+}
+.update:hover{
+    background-color: rgba(137, 43, 226, 0.725);
+    cursor:pointer;
 }
