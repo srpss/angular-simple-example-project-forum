@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from './store/board.reducer';
+import { authInterceptorProviders } from './_helpers/auth.interceptor';
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import { boardReducer } from './store/board.reducer';
     ReactiveFormsModule,
     StoreModule.forRoot({boardEntries: boardReducer})
   ],
-  providers: [BoardService],
+  providers: [BoardService,authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

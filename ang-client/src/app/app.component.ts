@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { TokenStorageService } from './_services/token-storage.service';
 
 
 @Component({
@@ -7,7 +8,18 @@ import { HttpClientModule } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
+
+
+
 export class AppComponent implements HttpClientModule{
-  title = 'Hello World';
+  constructor(
+    private tokenStorage: TokenStorageService,
+    ) {
   
+  }
+
+  logout(){
+    this.tokenStorage.signOut();
+  }
 }

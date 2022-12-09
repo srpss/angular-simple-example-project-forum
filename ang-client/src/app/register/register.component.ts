@@ -18,11 +18,6 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit {
 
 
-  onClickSubmit() {
-
-
-  }
-
   form!: FormGroup;
   submitted = false;
   isLoggedIn = false;

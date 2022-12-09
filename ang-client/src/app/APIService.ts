@@ -23,13 +23,12 @@ export class BoardService {
 }
 
 @Injectable()
-export class RegisterSerivce{
+export class RegisterService{
+
   baseURL: string = "http://127.0.0.1:8080";
  
   constructor(public http: HttpClient) {
   }
-  
-  register(regForm:Register): Observable<any>{
-    return this.http.post(this.baseURL + "/api/auth/signup", regForm)
-  }
+
+ 
 }
