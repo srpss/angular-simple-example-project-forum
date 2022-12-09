@@ -27,7 +27,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(){
     this.form = this.formBuilder.group(
       {
-        fullname: ['', Validators.required],
+        
         username: [
           '',
           [
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
             Validators.maxLength(20)
           ]
         ],
-        email: ['', [Validators.required, Validators.email]],
+        
         password: [
           '',
           [
@@ -64,7 +64,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.form.invalid) {
       this.form.value.role ='admin';
-      console.log(JSON.stringify(this.form.value, null, 2));
+     
       
       return;
     }

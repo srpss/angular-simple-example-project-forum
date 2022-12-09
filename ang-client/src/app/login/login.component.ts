@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
   ngOnInit(){
     this.form = this.formBuilder.group(
       {
-        fullname: ['', Validators.required],
+     
         username: [
           '',
           [
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
             Validators.maxLength(20)
           ]
         ],
-        email: ['', [Validators.required, Validators.email]],
+       
         password: [
           '',
           [
@@ -39,11 +39,8 @@ export class LoginComponent implements OnInit{
             Validators.maxLength(40)
           ]
         ],
-        confirmPassword: ['', Validators.required],
-        acceptTerms: [false, Validators.requiredTrue]
-      },
-      {
-        validators: [Validation.match('password', 'confirmPassword')]
+      
+       
       }
     );
   }
@@ -56,7 +53,7 @@ export class LoginComponent implements OnInit{
     this.submitted = true;
 
     if (this.form.invalid) {
-      console.log(JSON.stringify(this.form.value, null, 2));
+    
       return;
     }
 
