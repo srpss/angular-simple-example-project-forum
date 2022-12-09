@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Register } from './register';
-import {Store} from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Validation from 'src/utils/validators'; 
+import Validation from 'src/utils/validators';
+
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -14,20 +19,28 @@ export class RegisterComponent implements OnInit {
 
 
   onClickSubmit() {
-    
-    
+
+
   }
 
   form!: FormGroup;
   submitted = false;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
 
-  constructor(private HttpClient:HttpClient,private store: Store ,private formBuilder: FormBuilder){
+  constructor(private HttpClient: HttpClient,
+    private store: Store,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private tokenStorage: TokenStorageService,
+    private router: Router) {
 
   }
-  ngOnInit(){
+  ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        
+
         username: [
           '',
           [
@@ -36,7 +49,7 @@ export class RegisterComponent implements OnInit {
             Validators.maxLength(20)
           ]
         ],
-        
+
         password: [
           '',
           [
@@ -59,20 +72,58 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    
+
     this.submitted = true;
 
     if (this.form.invalid) {
-      this.form.value.role ='admin';
-     
-      
+      this.form.value.role = 'admin';
+
+
       return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
-    
-  }
 
+    const { username, password } = this.form.value;
+
+    this.authService.register(username, password).subscribe({
+      next: (data) => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+      }
+      ,
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      }
+    });
+   setTimeout(() =>{
+    if(this.isLoginFailed !== true){
+      this.authService.login(username, password).subscribe({
+        next :(data) => {
+          this.tokenStorage.saveToken(data.accessToken);
+          this.tokenStorage.saveUser(data);
+  
+          this.isLoginFailed = false;
+          this.isLoggedIn = true;
+         
+          this.router.navigate(['/'])}
+          ,
+          error : (err)=>{
+            this.errorMessage = err.error.message;
+            this.isLoginFailed = true;
+          }
+        
+        }
+      );
+    }
+   }, 1000) 
+ 
+  }
+  // reloadPage(): void {
+  //   window.location.reload();
+  // }
   onReset(): void {
     this.submitted = false;
     this.form.reset();

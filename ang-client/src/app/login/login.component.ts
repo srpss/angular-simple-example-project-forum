@@ -7,6 +7,7 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import Validation from 'src/utils/validators'; 
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { Router } from '@angular/router';
 
 export interface IForm{
 
@@ -26,7 +27,13 @@ export class LoginComponent implements OnInit{
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  constructor(private HttpClient:HttpClient,private store: Store ,private formBuilder: FormBuilder, private authService: AuthService, private tokenStorage: TokenStorageService){
+  constructor(
+    private HttpClient:HttpClient,
+    private store: Store ,
+    private formBuilder: FormBuilder, 
+    private authService: AuthService, 
+    private tokenStorage: TokenStorageService,
+    private router: Router ){
 
   }
   ngOnInit(){
@@ -73,7 +80,7 @@ export class LoginComponent implements OnInit{
       return;
     }
 
-    console.log(JSON.stringify(this.form.value, null, 2));
+   // console.log(JSON.stringify(this.form.value, null, 2));
 
     const { username, password } = this.form.value;
 
@@ -85,7 +92,7 @@ export class LoginComponent implements OnInit{
         this.isLoginFailed = false;
         this.isLoggedIn = true;
        
-        this.reloadPage()}
+        this.router.navigate(['/'])}
         ,
         error : (err)=>{
           this.errorMessage = err.error.message;
@@ -95,9 +102,9 @@ export class LoginComponent implements OnInit{
       }
     );
   }
-  reloadPage(): void {
-    window.location.reload();
-  }
+  // reloadPage(): void {
+  //   window.location.reload();
+  // }
   onReset(): void {
     this.submitted = false;
     this.form.reset();
