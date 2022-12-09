@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { BoardService } from '../APIService';
 import { repos } from '../repos';
 import { HttpClientModule } from '@angular/common/http';
+import { Board } from './board';
 
 @Component({
   selector: 'app-main',
@@ -14,14 +15,14 @@ export class MainComponent implements HttpClientModule, OnInit{
   loading: boolean = false;
   errorMessage: string = "";
   
-  constructor(private boardService: BoardService) {
+  constructor(private BoardService: BoardService) {
 
   }
 
   public getRepos() {
     this.loading = true;
     this.errorMessage = "";
-     this.boardService.getRepos()
+     this.BoardService.getRepos()
       .subscribe((response) => {
         console.log("got it")
         this.repos = response;

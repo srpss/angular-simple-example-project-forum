@@ -1,11 +1,7 @@
 export interface IBoards {
     "_id": string;
-    "originalPoster": string;
+    "usename": string;
     "image": string;
-    "date": Date;
-    "owner": string;
-    "description": string[];
-    "__v": number;
 
 }
 

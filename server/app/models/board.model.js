@@ -10,8 +10,7 @@ const Board = mongoose.model(
     image: {type: String},
     description: [{comment: {type: String}, image: {type: String}, owner: {type: String}}],
     owner:{
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
+        type: String,
         required: true
     },
     date: {type: Date, required: true},
