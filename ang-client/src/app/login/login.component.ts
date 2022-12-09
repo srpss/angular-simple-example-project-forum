@@ -5,17 +5,28 @@ import {Store} from '@ngrx/store'
 
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Validation from 'src/utils/validators'; 
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
+export interface IForm{
+
+}
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-  form!: FormGroup;
+  form: any ={
+    username: null,
+    password: null
+  };
   submitted = false;
 
-  constructor(private HttpClient:HttpClient,private store: Store ,private formBuilder: FormBuilder){
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  constructor(private HttpClient:HttpClient,private store: Store ,private formBuilder: FormBuilder, private authService: AuthService, private tokenStorage: TokenStorageService){
 
   }
   ngOnInit(){
@@ -43,6 +54,11 @@ export class LoginComponent implements OnInit{
        
       }
     );
+
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+     
+    }
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -58,8 +74,30 @@ export class LoginComponent implements OnInit{
     }
 
     console.log(JSON.stringify(this.form.value, null, 2));
-  }
 
+    const { username, password } = this.form.value;
+
+    this.authService.login(username, password).subscribe({
+      next :(data) => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
+
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+       
+        this.reloadPage()}
+        ,
+        error : (err)=>{
+          this.errorMessage = err.error.message;
+          this.isLoginFailed = true;
+        }
+      
+      }
+    );
+  }
+  reloadPage(): void {
+    window.location.reload();
+  }
   onReset(): void {
     this.submitted = false;
     this.form.reset();

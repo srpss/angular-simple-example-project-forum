@@ -7,6 +7,7 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
+  req.body.roles = "admin"
   const user = new User({
     username: req.body.username,
     password: bcrypt.hashSync(req.body.password, 8)
