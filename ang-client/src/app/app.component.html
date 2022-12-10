@@ -12,14 +12,14 @@
       <li>
         <a class="button"  routerLink="profile">Profile</a>
       </li>
-      <li>
-        <a class="button"  routerLink="register">Register</a>
+      <li *ngIf="!isLoggedIn">
+        <a class="button"  routerLink="register" >Register</a>
       </li>
-      <li>
+      <li  *ngIf="!isLoggedIn">
         <a class="button"  routerLink="login">Login</a>
       </li>
-      <li>
-        <a class="button"  (click)="logout()">Logout</a>
+      <li *ngIf="isLoggedIn">
+        <a class="button"  (click)="logout()" >Logout</a>
       </li>
     </ul>
   </nav>

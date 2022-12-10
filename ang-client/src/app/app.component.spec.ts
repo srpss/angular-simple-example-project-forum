@@ -23,7 +23,7 @@ describe('AppComponent', () => {
   it(`should have as title 'ang-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ang-client');
+    expect(app.isLoggedIn).toEqual(true);
   });
 
   it('should render title', () => {

@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit{
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-       
+        this.reloadPage();
         this.router.navigate(['/'])}
         ,
         error : (err)=>{
@@ -102,9 +102,9 @@ export class LoginComponent implements OnInit{
       }
     );
   }
-  // reloadPage(): void {
-  //   window.location.reload();
-  // }
+  reloadPage(): void {
+    window.location.reload();
+  }
   onReset(): void {
     this.submitted = false;
     this.form.reset();

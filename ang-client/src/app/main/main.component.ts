@@ -37,4 +37,9 @@ export class MainComponent implements HttpClientModule, OnInit{
  ngOnInit(): void {
    this.getRepos()
  }
+
+
+
+
+
 }

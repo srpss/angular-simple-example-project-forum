@@ -102,7 +102,7 @@ export class RegisterComponent implements OnInit {
   
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-         
+          this.reloadPage();
           this.router.navigate(['/'])}
           ,
           error : (err)=>{
@@ -116,9 +116,9 @@ export class RegisterComponent implements OnInit {
    }, 1000) 
  
   }
-  // reloadPage(): void {
-  //   window.location.reload();
-  // }
+  reloadPage(): void {
+    window.location.reload();
+  }
   onReset(): void {
     this.submitted = false;
     this.form.reset();
