@@ -17,28 +17,31 @@ import { boardReducer } from './store/board.reducer';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { loggedReducer } from './store/logged.reducer';
 import { FourofourComponent } from './fourofour/fourofour.component';
+import { CreateComponent } from './main/create/create.component';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainComponent,
-    SearchComponent,
-    ProfileComponent,
-    RegisterComponent,
-    LoginComponent,
-    FourofourComponent,
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    StoreModule.forRoot({test: loggedReducer})
-  ],
-  providers: [BoardService,authInterceptorProviders],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        MainComponent,
+        SearchComponent,
+        ProfileComponent,
+        RegisterComponent,
+        LoginComponent,
+        FourofourComponent,
+        CreateComponent
+        
+    ],
+    providers: [BoardService, authInterceptorProviders],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        StoreModule.forRoot({ test: loggedReducer }),
+        
+    ]
 })
 export class AppModule { }

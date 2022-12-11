@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+
 import { BoardService } from '../APIService';
 import { repos } from '../repos';
 import { HttpClientModule } from '@angular/common/http';
-import { Board } from './board';
 
 @Component({
   selector: 'app-main',

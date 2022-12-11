@@ -8,10 +8,12 @@ import { MainComponent } from './main.component';
 
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from '../store/board.reducer';
+import { CreateComponent } from './create/create.component';
+
 
 @NgModule({
   declarations: [
-    
+    CreateComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { boardReducer } from '../store/board.reducer';
     FormsModule,
     BrowserModule,
     StoreModule.forRoot({boardEntries: boardReducer})
+  
   ],
   providers: [BoardService],
   bootstrap: [MainComponent]

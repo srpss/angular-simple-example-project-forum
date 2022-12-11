@@ -1,8 +1,12 @@
-<div class="main">
+
+   <div class="create">
+    <app-create></app-create>
+  
+  </div>
+<div class="main1">
     <button (click)="onUpdate()" class="update">Refresh</button>
-    <div class="create">
-        
-    </div>
+ 
+    <div class="main">
     <div class="card" *ngFor="let repo of repos;">
         <div class="left">
             <img src={{repo.image}} alt="board-image" id="image">
@@ -14,4 +18,5 @@
             <a class="button" class="goTo" routerLink="/board/{{repo._id}}">Comments</a>
         </div>
     </div>
+</div>
 </div>
