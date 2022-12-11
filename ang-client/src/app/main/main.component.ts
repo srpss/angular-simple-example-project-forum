@@ -24,9 +24,9 @@ export class MainComponent implements HttpClientModule, OnInit{
     this.errorMessage = "";
      this.BoardService.getRepos()
       .subscribe((response) => {
-        console.log("got it")
+       // console.log("got it")
         this.repos = response;
-        console.log(this.repos)
+        //console.log(this.repos)
       })
   }
   

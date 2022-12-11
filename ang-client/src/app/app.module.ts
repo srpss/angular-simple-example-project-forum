@@ -13,7 +13,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from './store/board.reducer';
+
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { loggedReducer } from './store/logged.reducer';
+import { FourofourComponent } from './fourofour/fourofour.component';
 
 
 @NgModule({
@@ -24,6 +27,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     ProfileComponent,
     RegisterComponent,
     LoginComponent,
+    FourofourComponent,
 
   ],
   imports: [
@@ -32,7 +36,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.forRoot({boardEntries: boardReducer})
+    StoreModule.forRoot({test: loggedReducer})
   ],
   providers: [BoardService,authInterceptorProviders],
   bootstrap: [AppComponent]
