@@ -9,7 +9,7 @@
       <li>
         <a class="button"  routerLink="search">Search</a>
       </li>
-      <li>
+      <li *ngIf="isItLogged()">
         <a class="button"  routerLink="profile">Profile</a>
       </li>
       <li *ngIf="!isItLogged()">

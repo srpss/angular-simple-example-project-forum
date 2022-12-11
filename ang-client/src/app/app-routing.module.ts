@@ -6,11 +6,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { SearchComponent } from './search/search.component';
 import { FourofourComponent } from './fourofour/fourofour.component';
+import { AuthGuard } from './authG';
 
 
 const routes: Routes = [{path: 'register', component: RegisterComponent},
 {path: 'login', component: LoginComponent},
-{path: 'profile', component: ProfileComponent},
+{path: 'profile', component: ProfileComponent,  canActivate: [AuthGuard]},
 {path: '', component: MainComponent},
 {path: 'search', component: SearchComponent},
 {path: '404', component: FourofourComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [{path: 'register', component: RegisterComponent},
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }
