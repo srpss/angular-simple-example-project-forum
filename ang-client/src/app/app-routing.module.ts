@@ -9,8 +9,8 @@ import { FourofourComponent } from './fourofour/fourofour.component';
 import { AuthGuard } from './authG';
 
 
-const routes: Routes = [{path: 'register', component: RegisterComponent},
-{path: 'login', component: LoginComponent},
+const routes: Routes = [{path: 'register', component: RegisterComponent,  canActivate: [AuthGuard]},
+{path: 'login', component: LoginComponent,  canActivate: [AuthGuard]},
 {path: 'profile', component: ProfileComponent,  canActivate: [AuthGuard]},
 {path: '', component: MainComponent},
 {path: 'search', component: SearchComponent},
