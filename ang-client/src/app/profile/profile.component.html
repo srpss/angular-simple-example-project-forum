@@ -1,1 +1,37 @@
-<p>profile works!</p>
+<div class="profile">
+<p>your profile</p>
+<p>{{userInfo.username}}</p>
+<img src="{{userInfo.image}}">
+<div class="">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" formControlName="originalPoster" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['originalPoster'].errors }" />
+            <div *ngIf="submitted && f['originalPoster'].errors" class="invalid-feedback">
+                <div *ngIf="f['originalPoster'].errors['required']">Title is required</div>
+                <div *ngIf="f['originalPoster'].errors['maxlength']">
+                    Title must not exceed 20 characters
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Image</label>
+            <input type="text" formControlName="image" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['image'].errors }" />
+            <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                <div *ngIf="f['image'].errors['required']">Image is required</div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Create</button>
+          
+        </div>
+    </form>
+</div>
+</div>

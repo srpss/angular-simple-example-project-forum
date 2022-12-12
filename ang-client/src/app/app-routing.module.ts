@@ -7,19 +7,22 @@ import { MainComponent } from './main/main.component';
 import { SearchComponent } from './search/search.component';
 import { FourofourComponent } from './fourofour/fourofour.component';
 import { AuthGuard } from './authG';
+import { guardMain } from './guardmain';
 
 
-const routes: Routes = [{path: 'register', component: RegisterComponent,  canActivate: [AuthGuard]},
-{path: 'login', component: LoginComponent,  canActivate: [AuthGuard]},
-{path: 'profile', component: ProfileComponent,  canActivate: [AuthGuard]},
-{path: '', component: MainComponent},
-{path: 'search', component: SearchComponent},
-{path: '404', component: FourofourComponent},
-{path: '**', redirectTo: '/404'}];
+const routes: Routes = [
+  { path: 'register', component: RegisterComponent, canActivate: [guardMain] },
+  { path: 'login', component: LoginComponent, canActivate: [guardMain] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: '', component: MainComponent },
+  { path: 'search', component: SearchComponent },
+  { path: '404', component: FourofourComponent },
+  { path: '**', redirectTo: '/404' } 
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, guardMain]
 })
 export class AppRoutingModule { }
