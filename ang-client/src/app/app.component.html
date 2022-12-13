@@ -3,6 +3,9 @@
  
   <nav>
     <ul>
+      <li *ngIf="isItLogged()">
+        <img class="img-menu" src="{{image$ | async}}">
+      </li>
       <li>
         <a class="button" routerLink="/">Main</a>
       </li>

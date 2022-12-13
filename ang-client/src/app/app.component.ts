@@ -1,11 +1,12 @@
 import { Component, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenStorageService } from './_services/token-storage.service';
-import { BehaviorSubject, Observable, of , from} from 'rxjs';
+import { BehaviorSubject, Observable, of, from } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { toggle } from './store/logged.reducer';
 import { logged, notLogged } from './store/logged.actions';
 import { Router } from '@angular/router';
+import { ImageStore } from './store/image-store';
 
 
 @Component({
@@ -17,39 +18,42 @@ import { Router } from '@angular/router';
 
 
 
-export class AppComponent implements OnInit, HttpClientModule{
+export class AppComponent implements OnInit, HttpClientModule {
 
- 
+
 
   isLoggedIn = this.tokenStorage.getUser();
   showAdminBoard = false;
   showModeratorBoard = false;
   username?: string;
 
-
+  public image$: Observable<string>;
+  
   constructor(
-    private tokenStorage: TokenStorageService, private store:Store<{test:boolean}>, private cd: ChangeDetectorRef
-    ,
-    private router: Router) {
-    
+    private tokenStorage: TokenStorageService, 
+    private store: Store<{ test: boolean }>, 
+    private cd: ChangeDetectorRef,
+    private router: Router,
+    private imageStore: ImageStore) {
+      this.image$ = this.imageStore.selectUser();
   }
 
-  isItLogged(){
+  isItLogged() {
     this.isLoggedIn = !!this.tokenStorage.getToken();
-   
+
     return this.isLoggedIn
   }
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorage.getToken();
-    
+
     if (this.isLoggedIn) {
       const user = this.tokenStorage.getUser();
       this.username = user.username;
- 
+
     }
   }
-  logout(){
+  logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/']);
     this.cd.detectChanges();
