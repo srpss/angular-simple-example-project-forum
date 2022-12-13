@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UpdateUser } from '../_services/update-user.service';
 import { Observable } from 'rxjs';
+import { CounterStore } from '../store/counter-store';
 
 @Component({
   selector: 'app-profile',
@@ -22,12 +23,13 @@ export class ProfileComponent {
   submitted = false;
 
   errorMessage = '';
+  public counter$: Observable<number>;
 
   constructor(private tokenStorage: TokenStorageService,
     private formBuilder: FormBuilder, private userUpdate: UpdateUser,
-
+    public counterStore: CounterStore
   ) {
-
+    this.counter$ = this.counterStore.selectCount();
   }
   userInfo = this.tokenStorage.getUser();
  

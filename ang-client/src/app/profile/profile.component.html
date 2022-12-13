@@ -1,6 +1,10 @@
 <div class="profile">
 <p>Your profile</p>
 <p>{{userInfo.username}}</p>
+<p>{{counter$ | async}}</p>
+<h1>Counter: {{ counter$ | async }}</h1>
+  <button (click)="counterStore.decrement()">Decrement</button>
+  <button (click)="counterStore.increment()">Increment</button>
 <img src={{getImage()}}>
 </div>
 <div class="change-profile-form">
