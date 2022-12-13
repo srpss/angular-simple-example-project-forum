@@ -5,6 +5,8 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { UpdateUser } from '../_services/update-user.service';
 import { Observable } from 'rxjs';
 import { CounterStore } from '../store/counter-store';
+import { UserState, UserStore } from '../store/user-store';
+import { ImageStore } from '../store/image-store';
 
 @Component({
   selector: 'app-profile',
@@ -24,12 +26,18 @@ export class ProfileComponent {
 
   errorMessage = '';
   public counter$: Observable<number>;
-
+  public user$: Observable<string>;
+  public image$: Observable<string>;
+ 
   constructor(private tokenStorage: TokenStorageService,
     private formBuilder: FormBuilder, private userUpdate: UpdateUser,
-    public counterStore: CounterStore
+    public counterStore: CounterStore,
+    public userStore: UserStore ,
+    private imageStore: ImageStore
   ) {
     this.counter$ = this.counterStore.selectCount();
+    this.user$ = this.userStore.selectUser();
+    this.image$ = this.imageStore.selectUser();
   }
   userInfo = this.tokenStorage.getUser();
  
@@ -99,7 +107,8 @@ export class ProfileComponent {
         currentUser.username = userForm.username;
         currentUser.image = userForm.image;
         this.tokenStorage.saveUser(currentUser);
-   
+        this.userStore.change(userForm.username)
+        this.imageStore.change(userForm.image)
 
       }
       ,

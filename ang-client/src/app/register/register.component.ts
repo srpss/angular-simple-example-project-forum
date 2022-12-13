@@ -8,6 +8,9 @@ import Validation from 'src/utils/validators';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { UserState, UserStore } from '../store/user-store';
+import { ImageStore } from '../store/image-store';
 
 
 @Component({
@@ -23,14 +26,19 @@ export class RegisterComponent implements OnInit {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
+  public user$: Observable<string>;
+  public image$: Observable<string>;
 
   constructor(private HttpClient: HttpClient,
     private store: Store,
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
-    private router: Router) {
-
+    private router: Router,
+    private userStore: UserStore,
+    private imageStore: ImageStore) {
+      this.user$ = this.userStore.selectUser();
+      this.image$ = this.imageStore.selectUser();
   }
   ngOnInit() {
     this.form = this.formBuilder.group(
@@ -102,7 +110,9 @@ export class RegisterComponent implements OnInit {
   
           this.isLoginFailed = false;
           this.isLoggedIn = true;
-        
+          this.userStore.change(data.username)
+          this.imageStore.change(data.image)
+
           this.router.navigate(['/'])}
           ,
           error : (err)=>{

@@ -19,6 +19,8 @@ import { loggedReducer } from './store/logged.reducer';
 import { FourofourComponent } from './fourofour/fourofour.component';
 import { CreateComponent } from './main/create/create.component';
 import { CounterStore } from './store/counter-store';
+import { UserStore } from './store/user-store';
+import { ImageStore } from './store/image-store';
 
 
 @NgModule({
@@ -32,7 +34,7 @@ import { CounterStore } from './store/counter-store';
         FourofourComponent,
         CreateComponent
     ],
-    providers: [BoardService, authInterceptorProviders, CounterStore],
+    providers: [BoardService, authInterceptorProviders, CounterStore,UserStore, ImageStore],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
