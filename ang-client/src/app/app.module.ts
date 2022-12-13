@@ -13,7 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
 import { boardReducer } from './store/board.reducer';
-
+import { NgSimpleStateModule } from 'ng-simple-state';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { loggedReducer } from './store/logged.reducer';
 import { FourofourComponent } from './fourofour/fourofour.component';
@@ -41,6 +41,9 @@ import { CreateComponent } from './main/create/create.component';
         FormsModule,
         ReactiveFormsModule,
         StoreModule.forRoot({ test: loggedReducer }),
+        NgSimpleStateModule.forRoot({
+         
+        }) 
         
     ]
 })

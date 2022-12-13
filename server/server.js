@@ -78,7 +78,7 @@ app.get('/user/:id', async (req, res) => {
   const id = req.params.id
   try {
     const user = await boardsService.getUser(id).lean();
-    const editUser = [{_id:user[0]._id, username: user[0].username, image: user[0].image}]
+    const editUser = [{id:user[0]._id, username: user[0].username, image: user[0].image}]
     
     res.json(editUser);
   } catch (error) {

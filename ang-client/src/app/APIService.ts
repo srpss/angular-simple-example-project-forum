@@ -13,10 +13,13 @@ export class BoardService {
   baseURL: string = "http://127.0.0.1:8080";
  
   constructor(public http: HttpClient) {
+   
   }
  
+ 
   getRepos(): Observable<any> {
-    return this.http.get(this.baseURL + "/boards")
+    
+    return this.http.get(this.baseURL + "/boards",{headers: {'x-access-token':'test'}})
   }
  
   

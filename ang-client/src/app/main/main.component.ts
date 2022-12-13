@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../APIService';
 import { repos } from '../repos';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateComponent } from './create/create.component';
 
 @Component({
   selector: 'app-main',

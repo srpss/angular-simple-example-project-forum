@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+
 import { TokenStorageService } from '../_services/token-storage.service';
+import { UpdateUser } from '../_services/update-user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -8,69 +11,115 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent {
-  form: any ={
-    originalPoster: null,
+  form: any = {
+    username: null,
     image: null
   };
+
+  // formPass: any ={
+  //   password: null,
+  // };
   submitted = false;
 
-  isLoggedIn = false;
-  isLoginFailed = false;
   errorMessage = '';
 
-constructor(private tokenStorage: TokenStorageService,
-  private formBuilder: FormBuilder,
+  constructor(private tokenStorage: TokenStorageService,
+    private formBuilder: FormBuilder, private userUpdate: UpdateUser,
 
-  ){
+  ) {
 
-}
-
-ngOnInit(){
-  this.form = this.formBuilder.group(
-    {
-   
-      originalPoster: [
-        '',
-        [
-          Validators.required,
-          Validators.maxLength(20)
-        ]
-      ],
-     
-      image: [
-        '',
-        [
-          Validators.required,
-        ]
-      ],
+  }
+  userInfo = this.tokenStorage.getUser();
+ 
+ getImage(){
+    const image = this.userInfo.image
     
-     
-    }
-  );
+     return image;
+  }
 
-  if (this.tokenStorage.getToken()) {
-    this.isLoggedIn = true;
+  currentUsername: any;
+  currentImage: any;
+  subscription: any;
+
+  ngOnInit() {
+
    
+    this.form = this.formBuilder.group(
+      {
+
+        username: [
+          this.userInfo.username,
+          [ 
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20)
+          ]
+        ],
+
+        image: [
+          this.userInfo.image,
+          [
+            Validators.required,
+          ]
+        ],
+
+
+      }
+    );
+
   }
-}
 
-get f(): { [key: string]: AbstractControl } {
-  return this.form.controls;
-}
 
-onSubmit(): void {
-  this.submitted = true;
-
-  if (this.form.invalid) {
-  
-    return;
+  get f(): { [key: string]: AbstractControl } {
+    return this.form.controls;
   }
 
- // console.log(JSON.stringify(this.form.value, null, 2));
 
-  const { originalPoster, image } = this.form.value;
 
-}
- userInfo = this.tokenStorage.getUser();  
 
+  onSubmit(): void {
+    this.submitted = true;
+
+    if (this.form.invalid) {
+
+      return;
+    }
+    const userForm = this.form.value;
+
+    this.userUpdate.update(userForm.username, userForm.image).subscribe({
+      next: () => {
+
+        const USER_KEY = 'auth-user';
+
+        const user = (window.sessionStorage.getItem(USER_KEY)) ;
+        let currentUser = user !== null ? JSON.parse(user) : "";
+    
+        currentUser.username = userForm.username;
+        currentUser.image = userForm.image;
+        this.tokenStorage.saveUser(currentUser);
+   
+
+      }
+      ,
+      error: (err) => {
+        this.errorMessage = err.error.message;
+      }
+    }
+    );
+    // this.userUpdate.getUser().subscribe({
+    //   next:(data) =>{
+    //     this.tokenStorage.saveUser(data);
+    //   }  ,
+    //   error: (err) => {
+    //     this.errorMessage = err.error.message;
+    //   }
+    // })
+
+    const { username, image } = this.form.value;
+
+  }
+
+  onSubmitPassword() {
+
+  }
 }

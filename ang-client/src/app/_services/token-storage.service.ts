@@ -36,3 +36,15 @@ export class TokenStorageService {
     return {};
   }
 }
+
+export interface User{
+  
+    "id": string,
+    "username": string,
+    "image": string,
+    "roles": [
+      string
+    ],
+    "accessToken": string
+  
+}
