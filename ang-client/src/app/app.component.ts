@@ -1,10 +1,7 @@
 import { Component, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { TokenStorageService } from './_services/token-storage.service';
-import { BehaviorSubject, Observable, of, from } from 'rxjs';
-import { Store } from '@ngrx/store';
-import { toggle } from './store/logged.reducer';
-import { logged, notLogged } from './store/logged.actions';
+import { Observable} from 'rxjs';
 import { Router } from '@angular/router';
 import { ImageStore } from './store/image-store';
 
@@ -28,10 +25,10 @@ export class AppComponent implements OnInit, HttpClientModule {
   username?: string;
 
   public image$: Observable<string>;
-  
+
   constructor(
     private tokenStorage: TokenStorageService, 
-    private store: Store<{ test: boolean }>, 
+   
     private cd: ChangeDetectorRef,
     private router: Router,
     private imageStore: ImageStore) {

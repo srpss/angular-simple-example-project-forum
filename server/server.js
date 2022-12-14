@@ -214,10 +214,11 @@ app.post('/boards', async (req, res) => {
   try {
 
     let data = req.body
-
+    const d = new Date();
+    data.date= d;
     const boards = await boardsService.create(data);
 
-    res.status(201).json(boards._id);
+    res.status(201).json(boards);
   } catch (error) {
     res.status(500).json({ error: error.message });
 

@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/_services/auth.service';
+import { ThreadService } from 'src/app/_services/thread.service';
 import { TokenStorageService } from 'src/app/_services/token-storage.service';
 
 @Component({
@@ -24,7 +25,7 @@ export class CreateComponent implements OnInit{
   constructor(
  
     private formBuilder: FormBuilder, 
-    private authService: AuthService, 
+    private thrService: ThreadService, 
     private tokenStorage: TokenStorageService,
     private router: Router ){
 
@@ -74,14 +75,13 @@ export class CreateComponent implements OnInit{
 
     const { originalPoster, image } = this.form.value;
 
-    this.authService.login(originalPoster, image).subscribe({
-      next :(data) => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+    const USER_KEY = 'auth-user';
+    const user = (window.sessionStorage.getItem(USER_KEY)) ;
+    let currentUser = user !== null ? JSON.parse(user) : "";
 
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-     
+    this.thrService.create(originalPoster, image, currentUser.username).subscribe({
+      next :(data) => {
+      
         this.router.navigate(['/'])}
         ,
         error : (err)=>{
