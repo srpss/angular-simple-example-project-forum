@@ -4,6 +4,9 @@ import { BoardService } from '../APIService';
 import { repos } from '../repos';
 import { HttpClientModule } from '@angular/common/http';
 import { CreateComponent } from './create/create.component';
+import { Router } from '@angular/router';
+import { UserStore } from '../store/user-store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-main',
@@ -14,9 +17,11 @@ export class MainComponent implements HttpClientModule, OnInit{
   repos: repos[] = [];
   loading: boolean = false;
   errorMessage: string = "";
-  
-  constructor(private BoardService: BoardService) {
-
+  public user$: Observable<string>;
+  constructor(private BoardService: BoardService,
+    private router: Router,
+    public userStore: UserStore) {
+      this.user$ = this.userStore.selectUser();
   }
 
   public getRepos() {
@@ -35,9 +40,17 @@ export class MainComponent implements HttpClientModule, OnInit{
   }
 
  ngOnInit(): void {
+  this.router.routeReuseStrategy.shouldReuseRoute = () => false;
    this.getRepos()
  }
 
+ onDelete(id: string){
+
+  this.BoardService.deleteThread(id).subscribe((response) => {
+    this.onUpdate()
+   });
+
+ }
 
 
 

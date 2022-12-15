@@ -18,7 +18,7 @@ import { ImageStore } from './store/image-store';
 export class AppComponent implements OnInit, HttpClientModule {
 
 
-
+  owner: boolean = false;
   isLoggedIn = this.tokenStorage.getUser();
   showAdminBoard = false;
   showModeratorBoard = false;
@@ -41,6 +41,10 @@ export class AppComponent implements OnInit, HttpClientModule {
     return this.isLoggedIn
   }
 
+  isOwner(){
+    
+    return this.owner
+  }
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorage.getToken();
 

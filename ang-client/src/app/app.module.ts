@@ -21,6 +21,8 @@ import { CreateComponent } from './main/create/create.component';
 import { CounterStore } from './store/counter-store';
 import { UserStore } from './store/user-store';
 import { ImageStore } from './store/image-store';
+import { RouterModule } from '@angular/router';
+import { ThreadComponent } from './thread/thread.component';
 
 
 @NgModule({
@@ -32,7 +34,8 @@ import { ImageStore } from './store/image-store';
         RegisterComponent,
         LoginComponent,
         FourofourComponent,
-        CreateComponent
+        CreateComponent,
+        ThreadComponent
     ],
     providers: [BoardService, authInterceptorProviders, CounterStore,UserStore, ImageStore],
     bootstrap: [AppComponent],
@@ -42,10 +45,12 @@ import { ImageStore } from './store/image-store';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
+       
         StoreModule.forRoot({ test: loggedReducer }),
         NgSimpleStateModule.forRoot({
          
-        }) 
+        }),
+       
         
     ]
 })

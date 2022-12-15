@@ -12,8 +12,8 @@ import { TokenStorageService } from 'src/app/_services/token-storage.service';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss']
 })
-export class CreateComponent implements OnInit{
-  form: any ={
+export class CreateComponent implements OnInit {
+  form: any = {
     originalPoster: null,
     image: null
   };
@@ -23,17 +23,18 @@ export class CreateComponent implements OnInit{
   isLoginFailed = false;
   errorMessage = '';
   constructor(
- 
-    private formBuilder: FormBuilder, 
-    private thrService: ThreadService, 
+
+    private formBuilder: FormBuilder,
+    private thrService: ThreadService,
     private tokenStorage: TokenStorageService,
-    private router: Router ){
+    private router: Router) {
 
   }
-  ngOnInit(){
+  ngOnInit() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.form = this.formBuilder.group(
       {
-     
+
         originalPoster: [
           '',
           [
@@ -41,21 +42,21 @@ export class CreateComponent implements OnInit{
             Validators.maxLength(20)
           ]
         ],
-       
+
         image: [
           '',
           [
             Validators.required,
           ]
         ],
-      
-       
+
+
       }
     );
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-     
+
     }
   }
 
@@ -67,29 +68,29 @@ export class CreateComponent implements OnInit{
     this.submitted = true;
 
     if (this.form.invalid) {
-    
+
       return;
     }
 
-   // console.log(JSON.stringify(this.form.value, null, 2));
+    // console.log(JSON.stringify(this.form.value, null, 2));
 
     const { originalPoster, image } = this.form.value;
 
     const USER_KEY = 'auth-user';
-    const user = (window.sessionStorage.getItem(USER_KEY)) ;
+    const user = (window.sessionStorage.getItem(USER_KEY));
     let currentUser = user !== null ? JSON.parse(user) : "";
 
     this.thrService.create(originalPoster, image, currentUser.username).subscribe({
-      next :(data) => {
-      
-        this.router.navigate(['/'])}
-        ,
-        error : (err)=>{
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-        }
-      
-      }
+      next: () => {
+
+        this.reloadPage()
+      },
+      error: (err) => {
+        this.errorMessage = err.error.message;
+        this.isLoginFailed = true;
+      },
+
+    }
     );
   }
   reloadPage(): void {
@@ -100,11 +101,11 @@ export class CreateComponent implements OnInit{
     this.form.reset();
   }
 
-  isItLogged(){
+  isItLogged() {
     this.isLoggedIn = !!this.tokenStorage.getToken();
-   
+
     return this.isLoggedIn
   }
-  
-  }
+
+}
 

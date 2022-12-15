@@ -10,16 +10,16 @@
         <a class="button" routerLink="/">Main</a>
       </li>
       <li>
-        <a class="button"  routerLink="search">Search</a>
+        <a class="button"  routerLink="/search">Search</a>
       </li>
       <li *ngIf="isItLogged()">
-        <a class="button"  routerLink="profile">Profile</a>
+        <a class="button"  routerLink="/profile">Profile</a>
       </li>
       <li *ngIf="!isItLogged()">
-        <a class="button"  routerLink="register" >Register</a>
+        <a class="button"  routerLink="/register" >Register</a>
       </li>
       <li  *ngIf="!isItLogged()">
-        <a class="button"  routerLink="login">Login</a>
+        <a class="button"  routerLink="/login">Login</a>
       </li>
       <li *ngIf="isItLogged()">
         <a class="button"  (click)="logout()" >Logout</a>

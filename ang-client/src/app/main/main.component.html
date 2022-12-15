@@ -7,7 +7,7 @@
     <button (click)="onUpdate()" class="update">Refresh</button>
  
     <div class="main">
-    <div class="card" *ngFor="let repo of repos;">
+    <div class="card" *ngFor="let repo of repos">
         <div class="left">
             <img src={{repo.image}} alt="board-image" id="image">
         </div>
@@ -15,7 +15,8 @@
             <p id="date">Date: <b>{{repo.date}}</b></p>
             <p id="originalPoster">Title: <b>{{repo.originalPoster}}</b></p>
             <p id="owner">Creator: <b>{{repo.owner}}</b></p>
-            <a class="button" class="goTo" routerLink="/board/{{repo._id}}">Comments</a>
+            <a class="button" class="goTo" routerLink="/thread/{{repo._id}}">Comments</a>
+            <a *ngIf="(user$ | async) == repo.owner" class="button" (click)="onDelete(repo._id)">Delete</a>
         </div>
     </div>
 </div>
