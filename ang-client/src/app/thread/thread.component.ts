@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { BoardService } from '../APIService';
+import { UserStore } from '../store/user-store';
 
 interface IThread {
 
@@ -15,7 +16,12 @@ interface IThread {
 
 }
 
-
+interface IComment {
+  "_id": string,
+  "comment": string,
+  "image": string,
+  "owner": string
+}
 
 
 
@@ -28,12 +34,13 @@ interface IThread {
 
 
 export class ThreadComponent implements OnInit {
+  thrId: string = "";
   _id: string = ""
   originalPoster: string = "";
   image: string = "";
   owner: string = "";
   date: string = "";
-  description: string[] = [];
+  description: IComment[] = [];
   __v: number = 0;
 
 
@@ -47,17 +54,21 @@ export class ThreadComponent implements OnInit {
     "__v": 0
   };
   public thread$: Observable<string>;
+  public user$: Observable<string>;
 
   constructor(private route: ActivatedRoute,
-    private BoardService: BoardService) {
+    private BoardService: BoardService,
+    public userStore: UserStore) {
     const id = this.route.snapshot.params["id"];
     this.thread$ = this.BoardService.getThread(id);
-
+    this.user$ = this.userStore.selectUser();
   }
 
 
   ngOnInit(): void {
 
+    this.thrId = this._id
+    console.log(this.thrId)
 
 
     this.thread$.subscribe((data) => {
@@ -67,11 +78,27 @@ export class ThreadComponent implements OnInit {
       console.log(data)
       this._id = json._id;
       this.originalPoster = json.originalPoster;
-      this.image =json.image;
+      this.image = json.image;
       this.owner = json.owner;
       this.date = json.date;
       this.description = json.description;
       __v: 0;
     })
+  }
+
+  public onUpdate() {
+    this.ngOnInit()
+  }
+
+  onDelete(id: string) {
+
+    this.BoardService.deleteThread(id).subscribe((response) => {
+      this.onUpdate()
+    });
+  }
+  onDeleteComment(id: string, _id: string) {
+    this.BoardService.deleteComment(id, _id).subscribe((response) => {
+      this.onUpdate()
+    });
   }
 }

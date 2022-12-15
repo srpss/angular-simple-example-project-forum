@@ -42,9 +42,13 @@ export class BoardService {
     return this.http.get(this.baseURL + "/boards/" + id,{})
   }
   deleteThread(id: string):Observable<any>{
-    console.log(id)
+
     return this.http.post(this.baseURL + "/boards/delete/" + id,{}, httpOptions)
     
+  }
+  deleteComment(id: string, _id:string){
+    console.log(id)
+    return this.http.get(this.baseURL + "/deleteBoardDesc/" + id + "/" + _id,{})
   }
 }
 

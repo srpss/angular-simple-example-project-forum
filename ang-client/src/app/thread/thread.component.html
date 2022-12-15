@@ -1,8 +1,40 @@
-<p>{{_id}}</p>
-<p>{{originalPoster}}}</p>
 
-<p>{{date}}</p>
+   <div class="create">
+    <app-create></app-create>
+  
+  </div>
+<div class="main1">
+    <button (click)="onUpdate()" class="update">Refresh</button>
+ 
+    <div class="main">
+    <div class="card">
+        <div class="left">
+            <img src={{image}} alt="board-image" id="image">
+        </div>
+        <div class="right">
+            <p id="date">Date: <b>{{date}}</b></p>
+            <p id="originalPoster">Title: <b>{{originalPoster}}</b></p>
+            <p id="owner">Creator: <b>{{owner}}</b></p>
+            <a class="button" class="goTo" routerLink="/">Go Back</a>
+            <a *ngIf="(user$ | async) == owner" class="button" (click)="onDelete(_id)">Delete</a>
+        </div>
 
-<p>{{image}}</p>
-<p>{{description}}</p>
-<p>{{owner}}</p>
+        
+    </div>
+</div>
+</div>
+<div *ngFor="let desc of description">
+    <div class="comment">
+        <p>{{desc.owner}}</p>
+        <p>{{desc.image}}</p>
+        <p>{{desc.comment}}</p>
+        <a *ngIf="(user$ | async) == owner" class="button" (click)="onDeleteComment(_id,desc._id )">Delete</a>
+    </div>
+</div>
+
+<div class="details">
+
+
+
+   
+</div>
