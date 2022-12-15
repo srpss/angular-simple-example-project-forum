@@ -47,8 +47,18 @@ export class BoardService {
     
   }
   deleteComment(id: string, _id:string){
-    console.log(id)
+ 
     return this.http.get(this.baseURL + "/deleteBoardDesc/" + id + "/" + _id,{})
+  }
+  addComment( id:string,owner:string,comment: string, image:string){
+ 
+    return this.http.post(this.baseURL + "/boards/" + id , {
+      
+      owner,
+      comment,
+      image
+
+    },httpOptions)
   }
 }
 

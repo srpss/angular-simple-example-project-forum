@@ -1,34 +1,61 @@
 
-   <div class="create">
-    <app-create></app-create>
-  
-  </div>
+    <div *ngIf="isItLogged()">
+        <p>Create new thread</p>
+        <div class="create-form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+                <div class="form-group">
+                    <label>Comment:</label>
+                    <input type="text" formControlName="comment" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label>Image</label>
+                    <input type="text" formControlName="image" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f['image'].errors }" />
+                    <div *ngIf="submitted && f['image'].errors" class="invalid-feedback">
+                        <div *ngIf="f['image'].errors['required']">Image is required</div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
 <div class="main1">
     <button (click)="onUpdate()" class="update">Refresh</button>
- 
-    <div class="main">
-    <div class="card">
-        <div class="left">
-            <img src={{image}} alt="board-image" id="image">
-        </div>
-        <div class="right">
-            <p id="date">Date: <b>{{date}}</b></p>
-            <p id="originalPoster">Title: <b>{{originalPoster}}</b></p>
-            <p id="owner">Creator: <b>{{owner}}</b></p>
-            <a class="button" class="goTo" routerLink="/">Go Back</a>
-            <a *ngIf="(user$ | async) == owner" class="button" (click)="onDelete(_id)">Delete</a>
-        </div>
 
-        
+    <div class="main">
+        <div class="card">
+            <div class="left">
+                <img src={{image}} alt="board-image" id="image">
+            </div>
+            <div class="right">
+                <p id="date">Date: <b>{{date}}</b></p>
+                <p id="originalPoster">Title: <b>{{originalPoster}}</b></p>
+                <p id="owner">Creator: <b>{{owner}}</b></p>
+                <a class="button" class="goTo" routerLink="/">Go Back</a>
+                <a *ngIf="(user$ | async) == owner" class="button" (click)="onDelete(_id)">Delete</a>
+            </div>
+
+
+        </div>
     </div>
-</div>
 </div>
 <div *ngFor="let desc of description">
     <div class="comment">
         <p>{{desc.owner}}</p>
         <p>{{desc.image}}</p>
         <p>{{desc.comment}}</p>
-        <a *ngIf="(user$ | async) == owner" class="button" (click)="onDeleteComment(_id,desc._id )">Delete</a>
+        <a *ngIf="(user$ | async) == desc.owner" class="button" (click)="onDeleteComment(_id,desc._id )">Delete</a>
     </div>
 </div>
 
@@ -36,5 +63,5 @@
 
 
 
-   
+
 </div>
