@@ -3,25 +3,25 @@
  
   <nav>
     <ul>
-      <li *ngIf="isItLogged()">
+      <li   *ngIf="isItLogged()">
         <img class="img-menu" src="{{image$ | async}}">
       </li>
-      <li>
+      <li routerLinkActive="is-active"  [routerLinkActiveOptions]={exact:true}>
         <a class="button" routerLink="/">Main</a>
       </li>
-      <li>
+      <li routerLinkActive="is-active">
         <a class="button"  routerLink="/search">Search</a>
       </li>
-      <li *ngIf="isItLogged()">
+      <li routerLinkActive="is-active" *ngIf="isItLogged()">
         <a class="button"  routerLink="/profile">Profile</a>
       </li>
-      <li *ngIf="!isItLogged()">
+      <li routerLinkActive="is-active" *ngIf="!isItLogged()">
         <a class="button"  routerLink="/register" >Register</a>
       </li>
-      <li  *ngIf="!isItLogged()">
+      <li routerLinkActive="is-active" *ngIf="!isItLogged()">
         <a class="button"  routerLink="/login">Login</a>
       </li>
-      <li *ngIf="isItLogged()">
+      <li routerLinkActive="is-active" *ngIf="isItLogged()">
         <a class="button"  (click)="logout()" >Logout</a>
       </li>
     </ul>

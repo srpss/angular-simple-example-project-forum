@@ -57,6 +57,7 @@ export class AppComponent implements OnInit, HttpClientModule {
   logout() {
     this.tokenStorage.signOut();
     this.router.navigate(['/']);
+    
     this.cd.detectChanges();
   }
 

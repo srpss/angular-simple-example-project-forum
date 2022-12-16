@@ -30,4 +30,9 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard, guardMain]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+
+
+
+}

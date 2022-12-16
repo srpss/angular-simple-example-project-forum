@@ -30,7 +30,10 @@ export class MainComponent implements HttpClientModule, OnInit{
      this.BoardService.getRepos()
       .subscribe((response) => {
        // console.log("got it")
-        this.repos = response;
+       const tempData:repos[] = response;
+        this.repos = tempData.sort(
+          (objA, objB) => new Date(objB.date).getDate() - new Date(objA.date).getDate(),
+        );
         //console.log(this.repos)
       })
   }
