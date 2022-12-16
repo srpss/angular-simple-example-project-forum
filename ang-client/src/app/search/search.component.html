@@ -1,1 +1,37 @@
-<p>search works!</p>
+<div class="create">
+
+        <p>Search-</p>
+        <div class="create-form">
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+
+                <div class="form-group">
+                    <input type="text" formControlName="search" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" (click)="onReset()" class="btn btn-warning float-right">
+                        Reset
+                    </button>
+                </div>
+            </form>
+        
+    </div>
+
+</div>
+<div class="main1">
+
+    <div class="main">
+        <div class="card" *ngFor="let repo of repos">
+            <div class="left">
+                <img src={{repo.image}} alt="board-image" id="image">
+            </div>
+            <div class="right">
+                <p id="date">Date: <b>{{repo.date}}</b></p>
+                <p id="originalPoster">Title: <b>{{repo.originalPoster}}</b></p>
+                <p id="owner">Creator: <b>{{repo.owner}}</b></p>
+                <a class="button" class="goTo" routerLink="/thread/{{repo._id}}">Details</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -31,7 +31,7 @@ export class CreateComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+   
     this.form = this.formBuilder.group(
       {
 
@@ -81,9 +81,9 @@ export class CreateComponent implements OnInit {
     let currentUser = user !== null ? JSON.parse(user) : "";
 
     this.thrService.create(originalPoster, image, currentUser.username).subscribe({
-      next: () => {
+      next: (data) => {
 
-        this.reloadPage()
+        this.router.navigate(["thread/" + data._id])
       },
       error: (err) => {
         this.errorMessage = err.error.message;
@@ -93,9 +93,7 @@ export class CreateComponent implements OnInit {
     }
     );
   }
-  reloadPage(): void {
-    window.location.reload();
-  }
+
   onReset(): void {
     this.submitted = false;
     this.form.reset();

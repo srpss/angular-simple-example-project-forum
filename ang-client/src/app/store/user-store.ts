@@ -6,9 +6,9 @@ export interface UserState {
   username: string
 }
 const USER_KEY = 'auth-user';
-const user = (window.sessionStorage.getItem(USER_KEY)) ;
+const user = (window.sessionStorage.getItem(USER_KEY));
 let currentUser = user !== null ? JSON.parse(user) : "";
-    
+
 @Injectable()
 export class UserStore extends NgSimpleStateBaseStore<UserState> {
 
@@ -23,13 +23,11 @@ export class UserStore extends NgSimpleStateBaseStore<UserState> {
   }
 
   change(changes: string): void {
-    this.setState(state => ({ username: changes}));
-
-
-    }
-
-    reset(): void{
-      this.setState(state => ({username: ''}))
-    }
-      
+    this.setState(state => ({ username: changes }));
   }
+
+  reset(): void {
+    this.setState(state => ({ username: '' }))
+  }
+
+}

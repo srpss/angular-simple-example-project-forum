@@ -53,7 +53,7 @@
 <div *ngFor="let desc of description">
     <div class="comment">
         <p>{{desc.owner}}</p>
-        <p>{{desc.image}}</p>
+        <img src="{{desc.image}}">
         <p>{{desc.comment}}</p>
         <a *ngIf="(user$ | async) == desc.owner" class="button" (click)="onDeleteComment(_id,desc._id )">Delete</a>
     </div>

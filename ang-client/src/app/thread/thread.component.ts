@@ -73,6 +73,7 @@ export class ThreadComponent implements OnInit {
     public userStore: UserStore,
     private tokenStorage: TokenStorageService,
     private formBuilder: FormBuilder) {
+      
     const id = this.route.snapshot.params["id"];
     this.thread$ = this.BoardService.getThread(id);
     this.user$ = this.userStore.selectUser();
