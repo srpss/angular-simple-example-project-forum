@@ -7,7 +7,7 @@
         <img class="img-menu" src="{{image$ | async}}">
       </li>
       <li routerLinkActive="is-active"  [routerLinkActiveOptions]={exact:true}>
-        <a class="button" routerLink="/">Main</a>
+        <a routerLinkActive="is-active"  [routerLinkActiveOptions]={exact:true} class="button" routerLink="/">Main</a>
       </li>
       <li routerLinkActive="is-active">
         <a class="button"  routerLink="/search">Search</a>

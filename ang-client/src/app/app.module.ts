@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
@@ -23,6 +23,7 @@ import { UserStore } from './store/user-store';
 import { ImageStore } from './store/image-store';
 import { RouterModule } from '@angular/router';
 import { ThreadComponent } from './thread/thread.component';
+import { ErrorIntercept } from './error.interceptor';
 
 
 @NgModule({
@@ -37,7 +38,11 @@ import { ThreadComponent } from './thread/thread.component';
         CreateComponent,
         ThreadComponent
     ],
-    providers: [BoardService, authInterceptorProviders, CounterStore,UserStore, ImageStore],
+    providers: [  {
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorIntercept,
+        multi: true
+      },BoardService, authInterceptorProviders, CounterStore,UserStore, ImageStore],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
