@@ -58,7 +58,7 @@ app.get('/boards', async (req, res) => {
 
     res.json(boards);
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 
 });
@@ -70,7 +70,7 @@ app.get('/myboards/:id', [authJwt.verifyToken], async (req, res) => {
 
     res.json(boards);
   } catch (error) {
-    res.json({error: {message: error.message}  })
+    res.json({ message: error.message, status: 500 } )
   }
 });
 
@@ -82,7 +82,7 @@ app.get('/user/:id', async (req, res) => {
     
     res.json(editUser);
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 });
 
@@ -94,7 +94,7 @@ app.post('/user/:id', [authJwt.verifyToken], async (req, res) => {
 
     res.json(user);
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 });
 
@@ -108,7 +108,7 @@ app.post('/user-pass/:id', [authJwt.verifyToken], async (req, res) => {
    
     res.json({ message: "Password was updated!" });
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 });
 
@@ -119,7 +119,7 @@ app.post('/boards/delete/:_id', async (req, res) => {
 
     res.json(`Board was deleted ${boards}`);
   } catch (error) {
-    res.json({ error: {message: error.message}  })
+    res.json({ message: error.message, status: 500 } )
   }
 
 
@@ -131,7 +131,7 @@ app.get('/boards/:_id', async (req, res) => {
 
     res.json(board);
   } catch (error) {
-    res.json({error: {message: error.message}  })
+    res.json({ message: error.message, status: 500 } )
   }
 
 
@@ -157,7 +157,7 @@ app.post('/boards/:id', async (req, res) => {
 
     res.json(board);
   } catch (error) {
-    res.json({error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 
 
@@ -181,7 +181,7 @@ app.get('/deleteBoardDesc/:treadId/:id', async (req, res) => {
 
     res.json(board);
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 
 
@@ -202,7 +202,7 @@ app.post('/boardsDetails/:id', async (req, res) => {
 
     res.json(board);
   } catch (error) {
-    res.json({ error: {message: error.message} })
+    res.json({ message: error.message, status: 500 } )
   }
 
 
@@ -220,7 +220,7 @@ app.post('/boards', async (req, res) => {
 
     res.status(201).json(boards);
   } catch (error) {
-    res.status(500).json({ error: {message: error.message} });
+    res.status(500).json({ message: error.message, status: 500 } );
 
   }
 

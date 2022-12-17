@@ -9,13 +9,13 @@ export class GlobalErrorHandler implements ErrorHandler {
     private zone: NgZone
   ) {}
 
-  handleError(error: any) {
-    console.log(error)
+  handleError(error: HttpErrorResponse) {
+ 
     // Check if it's an error from an HTTP response
     if (!(error instanceof HttpErrorResponse)) {
-      error = error.rejection; // get the error object
+      error = error; // get the error object
     }
-    console.log(error)
+  
     this.zone.run(() =>
       this.errorDialogService.openDialog(
       
@@ -24,6 +24,5 @@ export class GlobalErrorHandler implements ErrorHandler {
       )
     );
 
-    console.error('Error from global error handler', error);
   }
 }

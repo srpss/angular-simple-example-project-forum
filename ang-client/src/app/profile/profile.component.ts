@@ -112,9 +112,9 @@ export class ProfileComponent {
 
       }
       ,
-      error: (err) => {
-        this.errorMessage = err.error.message;
-      }
+      error: ((err: any) => {
+       
+         throw Error(err)}) 
     }
     );
     // this.userUpdate.getUser().subscribe({

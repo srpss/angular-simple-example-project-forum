@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IBoards } from '../repos';
-import {Store} from '@ngrx/store'
-
+import { Store } from '@ngrx/store'
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import Validation from 'src/utils/validators'; 
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
-import { UserState, UserStore } from '../store/user-store';
+import { UserStore } from '../store/user-store';
 import { Observable } from 'rxjs';
 import { ImageStore } from '../store/image-store';
 
-export interface IForm{
+export interface IForm {
 
 }
 @Component({
@@ -20,8 +17,8 @@ export interface IForm{
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit{
-  form: any ={
+export class LoginComponent implements OnInit {
+  form: any = {
     username: null,
     password: null
   };
@@ -35,23 +32,23 @@ export class LoginComponent implements OnInit{
   public image$: Observable<string>;
 
   constructor(
-    private HttpClient:HttpClient,
-    private store: Store ,
-    private formBuilder: FormBuilder, 
-    private authService: AuthService, 
+    private HttpClient: HttpClient,
+    private store: Store,
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
     private tokenStorage: TokenStorageService,
     private router: Router,
     private userStore: UserStore,
-    private imageStore: ImageStore ){
+    private imageStore: ImageStore) {
 
-      this.user$ = this.userStore.selectUser();
-      this.image$ = this.imageStore.selectUser();
+    this.user$ = this.userStore.selectUser();
+    this.image$ = this.imageStore.selectUser();
   }
-  ngOnInit(){
-   
+  ngOnInit() {
+
     this.form = this.formBuilder.group(
       {
-     
+
         username: [
           '',
           [
@@ -60,7 +57,7 @@ export class LoginComponent implements OnInit{
             Validators.maxLength(20)
           ]
         ],
-       
+
         password: [
           '',
           [
@@ -69,14 +66,14 @@ export class LoginComponent implements OnInit{
             Validators.maxLength(40)
           ]
         ],
-      
-       
+
+
       }
     );
 
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
-     
+
     }
   }
 
@@ -88,16 +85,16 @@ export class LoginComponent implements OnInit{
     this.submitted = true;
 
     if (this.form.invalid) {
-    
+
       return;
     }
 
-   // console.log(JSON.stringify(this.form.value, null, 2));
+    // console.log(JSON.stringify(this.form.value, null, 2));
 
     const { username, password } = this.form.value;
 
     this.authService.login(username, password).subscribe({
-      next :(data) => {
+      next: (data) => {
         this.tokenStorage.saveToken(data.accessToken);
         this.tokenStorage.saveUser(data);
 
@@ -105,15 +102,12 @@ export class LoginComponent implements OnInit{
         this.isLoggedIn = true;
         this.userStore.change(data.username)
         this.imageStore.change(data.image)
-       
-        this.router.navigate(['/'])}
-        ,
-        error : (err)=>{
-          this.errorMessage = err.error.message;
-          this.isLoginFailed = true;
-        }
-      
-      }
+
+        this.router.navigate(['/'])
+      },
+      error: ((err: any) => {throw Error(err)}) 
+
+    }
     );
   }
   reloadPage(): void {
@@ -123,5 +117,5 @@ export class LoginComponent implements OnInit{
     this.submitted = false;
     this.form.reset();
   }
-  }
+}
 

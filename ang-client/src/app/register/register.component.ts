@@ -95,12 +95,17 @@ export class RegisterComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
       }
+     
       ,
-      error: (err) => {
-        this.errorMessage = err.error.message;
+      error: ((err: any) => {
         this.isLoginFailed = true;
-      }
+         throw Error(err)}) 
+
+        
+        
     });
+
+    if(this.isLoginFailed = false){
    setTimeout(() =>{
     if(this.isLoginFailed !== true){
       this.authService.login(username, password).subscribe({
@@ -115,16 +120,16 @@ export class RegisterComponent implements OnInit {
 
           this.router.navigate(['/'])}
           ,
-          error : (err)=>{
-            this.errorMessage = err.error.message;
-            this.isLoginFailed = true;
-          }
+      error: ((err: any) => {
+        
+         throw Error(err)}) 
+
         
         }
       );
     }
    }, 1000) 
- 
+  }
   }
   reloadPage(): void {
     window.location.reload();

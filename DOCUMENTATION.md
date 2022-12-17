@@ -1,6 +1,6 @@
-# react-project-exam
+# angular-project-exam
  simple exam project
- includes everything it needs. It was uploaded in Git with node_module
+ It should include all dependancies. It was uploaded in Git with node_module. (but if something is missing should be installed)
  cd client > npm i > ng serve
  cd server > npm i > npm start
 
@@ -10,8 +10,8 @@
 
 ## Client Architecture
 - angular app
-- everything related to the app is in client/src
-- consists of components, css, ts files
+- everything related to the app is in "ang-client/src"
+- consists of components, css, ts files, guards, error handler (but i think it can be only observed from Login and Register (if you send wrong auth credentials))
 
 ## Server Architecture
 - it is api server, only returns JSON
@@ -19,10 +19,10 @@
 
 ## What does react app do
 
-- Overall, you can create threads and post comments. With images
+- Overall, you can create threads and post comments. With images (images should be required as a whole)
 - Authetnication - signin and signup
-- Guests can view threads
-- forms have simple validation, some fields are required
-- errors are throwned in the console or navigation
+- Guests can view threads/search. They cannot see profile or create threads/comments
+- forms have simple validation, some fields are required and need specific charater amount
+- errors are throwned in the console or appear at bottom right corner (part of the error handler)
 - you can search threads
-- you can view your profile
+- you can view your profile if you are authenticated

@@ -77,6 +77,18 @@
 }
 
 
+.comment{
+   display: flex;
+   flex-direction: column;
+    margin: 0 auto;
+    background-color: coral;
+    border: 1px solid;
+    justify-content: center;
+    margin-top: 25px;
+    width: 400px;
+}
+
+
 .right {
     display: flex;
     flex-direction: row;
