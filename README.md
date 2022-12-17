@@ -3,7 +3,8 @@
  It should include all dependancies. It was uploaded in Git with node_module. (but if something is missing should be installed)
  cd client > npm i > ng serve
  cd server > npm i > npm start
-
+    
+    Also you need to have MongoDB installed (very default settings). You would need internet access to use images.
 ## Architecture 
 - Client - Angular
 - Server - Express, taken online, had it's own very basic api authentication
