@@ -2,3 +2,12 @@ img{
     width: 150px;
     height: 150px;
 }
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.change-profile-form{
+border: 1px solid;
+}
