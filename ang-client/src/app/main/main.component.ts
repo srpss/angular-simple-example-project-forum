@@ -55,7 +55,9 @@ export class MainComponent implements HttpClientModule, OnInit{
 
  }
 
-
+ handleError(){
+  
+ }
 
 
 }

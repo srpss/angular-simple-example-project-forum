@@ -79,10 +79,21 @@
 
 .right {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     text-align: center;
+  
 }
 
+.desc{
+border-top: 1px solid;
+border-bottom: 1px solid;
+}
+.btns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 .update {
     margin-top: 25px;
     color: white;

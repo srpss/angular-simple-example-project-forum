@@ -4,7 +4,7 @@
   <nav>
     <ul>
       <li   *ngIf="isItLogged()">
-        <img class="img-menu" src="{{image$ | async}}">
+        <img class="img-menu" src="{{image$ | async}}" >
       </li>
       <li routerLinkActive="is-active"  [routerLinkActiveOptions]={exact:true}>
         <a routerLinkActive="is-active"  [routerLinkActiveOptions]={exact:true} class="button" routerLink="/">Main</a>

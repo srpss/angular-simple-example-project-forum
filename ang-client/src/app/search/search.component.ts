@@ -7,7 +7,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['../main/main.component.scss']
 })
 
 

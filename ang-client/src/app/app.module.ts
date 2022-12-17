@@ -12,7 +12,7 @@ import { BoardService } from './APIService';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StoreModule } from '@ngrx/store';
-import { boardReducer } from './store/board.reducer';
+
 import { NgSimpleStateModule } from 'ng-simple-state';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { loggedReducer } from './store/logged.reducer';
@@ -21,11 +21,13 @@ import { CreateComponent } from './main/create/create.component';
 import { CounterStore } from './store/counter-store';
 import { UserStore } from './store/user-store';
 import { ImageStore } from './store/image-store';
-import { RouterModule } from '@angular/router';
+
 import { ThreadComponent } from './thread/thread.component';
 import { ErrorIntercept } from './error.interceptor';
-
-
+import { CoreModule } from './core/core.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
     declarations: [
         AppComponent,
@@ -36,27 +38,31 @@ import { ErrorIntercept } from './error.interceptor';
         LoginComponent,
         FourofourComponent,
         CreateComponent,
-        ThreadComponent
+        ThreadComponent,
+
     ],
-    providers: [  {
+    providers: [{
         provide: HTTP_INTERCEPTORS,
         useClass: ErrorIntercept,
         multi: true
-      },BoardService, authInterceptorProviders, CounterStore,UserStore, ImageStore],
+    }, BoardService, authInterceptorProviders, CounterStore, UserStore, ImageStore],
     bootstrap: [AppComponent],
-    imports: [
+    imports: [BrowserAnimationsModule,
+        MaterialModule, 
+        SharedModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-       
+        CoreModule,
         StoreModule.forRoot({ test: loggedReducer }),
         NgSimpleStateModule.forRoot({
-         
+
         }),
-       
-        
+        BrowserAnimationsModule,
+
+
     ]
 })
 export class AppModule { }

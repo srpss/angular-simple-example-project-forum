@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TokenStorageService } from './_services/token-storage.service';
 import { Observable} from 'rxjs';
 import { Router } from '@angular/router';
@@ -18,6 +18,7 @@ import { ImageStore } from './store/image-store';
 export class AppComponent implements OnInit, HttpClientModule {
 
 
+
   owner: boolean = false;
   isLoggedIn = this.tokenStorage.getUser();
   showAdminBoard = false;
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit, HttpClientModule {
 
   public image$: Observable<string>;
 
-  constructor(
+  constructor(private http: HttpClient,
     private tokenStorage: TokenStorageService, 
    
     private cd: ChangeDetectorRef,
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit, HttpClientModule {
     return this.owner
   }
   ngOnInit(): void {
+   
     this.isLoggedIn = !!this.tokenStorage.getToken();
 
     if (this.isLoggedIn) {
