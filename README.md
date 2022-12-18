@@ -18,7 +18,7 @@
 - it is api server, only returns JSON
 - it is very basic, not for production use.
 
-## What does react app do
+## What does ang app do
 
 - Overall, you can create threads and post comments. With images (images should be required as a whole)
 - Authetnication - signin and signup
