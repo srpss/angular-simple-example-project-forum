@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Register } from './register';
-import { Store } from '@ngrx/store'
+
+
 import { HttpClient } from '@angular/common/http';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Validation from 'src/utils/validators';
@@ -9,7 +9,7 @@ import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserState, UserStore } from '../store/user-store';
+import {  UserStore } from '../store/user-store';
 import { ImageStore } from '../store/image-store';
 
 
@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
   public image$: Observable<string>;
 
   constructor(private HttpClient: HttpClient,
-    private store: Store,
+   
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private tokenStorage: TokenStorageService,
@@ -105,7 +105,7 @@ export class RegisterComponent implements OnInit {
         
     });
 
-    if(this.isLoginFailed = false){
+   
    setTimeout(() =>{
     if(this.isLoginFailed !== true){
       this.authService.login(username, password).subscribe({
@@ -128,8 +128,8 @@ export class RegisterComponent implements OnInit {
         }
       );
     }
-   }, 1000) 
-  }
+   }, 100) 
+  
   }
   reloadPage(): void {
     window.location.reload();

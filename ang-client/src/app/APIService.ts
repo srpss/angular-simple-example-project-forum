@@ -1,25 +1,9 @@
 import { Injectable } from '@angular/core';
  
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { map, catchError} from 'rxjs/operators';
- 
-import { repos,IBoards } from './repos';
-import { Register } from './register/register';
- 
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable,  } from 'rxjs';
 
 
-interface IThread{
-    
-  "_id": string,
-  "originalPoster": string,
-  "image":string,
-  "owner":string,
-  "date": string,
-  "description": string[],
-  "__v": number
-
-}
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
